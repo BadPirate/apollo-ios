@@ -12,7 +12,7 @@
 //  for WebSocket: https://tools.ietf.org/html/rfc7692
 
 import Foundation
-import zlib
+import Z
 
 class Decompressor {
   enum Error: Swift.Error {
