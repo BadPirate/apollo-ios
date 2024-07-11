@@ -64,10 +64,7 @@ let package = Package(
       resources: [
         .copy("Resources/PrivacyInfo.xcprivacy")
       ],
-      swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
-      linkerSettings: [
-          .linkedLibrary("z")
-      ]
+      swiftSettings: [.enableUpcomingFeature("ExistentialAny")]
     ),
     .target(
       name: "ApolloTestSupport",
