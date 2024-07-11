@@ -9,6 +9,9 @@
 //  Derived Work License: https://github.com/apollographql/apollo-ios/blob/main/LICENSE
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public struct SSLClientCertificateError: LocalizedError {
     public var errorDescription: String?

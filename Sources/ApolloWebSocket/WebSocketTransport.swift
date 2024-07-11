@@ -3,6 +3,9 @@ import Apollo
 import ApolloAPI
 #endif
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 // MARK: - Transport Delegate
 
