@@ -9,7 +9,11 @@
 //  Derived Work License: https://github.com/apollographql/apollo-ios/blob/main/LICENSE
 
 import Foundation
+#if os(Linux)
+import Crypto
+#else
 import CommonCrypto
+#endif
 
 //Standard WebSocket close codes
 enum CloseCode : UInt16 {
@@ -1135,12 +1139,21 @@ public final class WebSocket: NSObject, WebSocketClient, StreamDelegate, WebSock
 }
 
 extension String {
-  func sha1Base64() -> String {
-    let data = self.data(using: String.Encoding.utf8)!
-    var digest = [UInt8](repeating: 0, count:Int(CC_SHA1_DIGEST_LENGTH))
-    data.withUnsafeBytes { _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &digest) }
-    return Data(digest).base64EncodedString()
-  }
+    #if os(Linux)
+    func sha1Base64() -> String {
+      let data = self.data(using: .utf8)!
+      let digest = Insecure.SHA1.hash(data: data)
+      let digestData = Data(digest)
+      return digestData.base64EncodedString()
+    }
+    #else
+    func sha1Base64() -> String {
+      let data = self.data(using: String.Encoding.utf8)!
+      var digest = [UInt8](repeating: 0, count:Int(CC_SHA1_DIGEST_LENGTH))
+      data.withUnsafeBytes { _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &digest) }
+      return Data(digest).base64EncodedString()
+    }
+    #endif
 }
 
 private extension Data {

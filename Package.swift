@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
   name: "Apollo",
   platforms: [
-    .iOS(.v12),
+    .iOS(.v13),
     .macOS(.v10_14),
     .tvOS(.v12),
     .watchOS(.v5),
@@ -25,7 +25,8 @@ let package = Package(
     .package(
       url: "https://github.com/stephencelis/SQLite.swift.git",
       .upToNextMajor(from: "0.15.1")),
-    .package(url:"https://github.com/fourplusone/swift-package-zlib", from: "1.2.11")
+    .package(url:"https://github.com/fourplusone/swift-package-zlib", from: "1.2.11"),
+    .package(url: "https://github.com/apple/swift-crypto.git", from: "3.5.2")
   ],
   targets: [
     .target(
@@ -61,7 +62,8 @@ let package = Package(
       name: "ApolloWebSocket",
       dependencies: [
         "Apollo",
-        .product(name: "Z",package:"swift-package-zlib")
+        .product(name: "Crypto", package: "swift-crypto"),
+        .product(name: "Z", package:"swift-package-zlib")
       ],
       resources: [
         .copy("Resources/PrivacyInfo.xcprivacy")

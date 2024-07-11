@@ -12,7 +12,11 @@
 //  for WebSocket: https://tools.ietf.org/html/rfc7692
 
 import Foundation
+#if os(Linux)
 import Z
+#else
+import zlib
+#endif
 
 class Decompressor {
   enum Error: Swift.Error {
