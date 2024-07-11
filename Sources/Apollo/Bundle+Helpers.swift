@@ -1,4 +1,8 @@
 import Foundation
+#if os(Linux)
+let kCFBundleIdentifierKey = "CFBundleIdentifier"
+let kCFBundleVersionKey = "CFBundleVersion"
+#endif
 
 extension Bundle {
 
