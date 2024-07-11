@@ -322,11 +322,13 @@ open class URLSessionClient: NSObject, URLSessionDelegate, URLSessionTaskDelegat
     }
   }
   
+    #if !os(Linux)
   open func urlSession(_ session: URLSession,
                        dataTask: URLSessionDataTask,
                        didBecome streamTask: URLSessionStreamTask) {
     // No default implementation
   }
+    #endif
   
   open func urlSession(_ session: URLSession,
                        dataTask: URLSessionDataTask,
