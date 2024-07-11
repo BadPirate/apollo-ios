@@ -25,6 +25,7 @@ let package = Package(
     .package(
       url: "https://github.com/stephencelis/SQLite.swift.git",
       .upToNextMajor(from: "0.15.1")),
+    .package(url:"https://github.com/fourplusone/swift-package-zlib", from: "1.2.11")
   ],
   targets: [
     .target(
@@ -59,7 +60,8 @@ let package = Package(
     .target(
       name: "ApolloWebSocket",
       dependencies: [
-        "Apollo"
+        "Apollo",
+        .product(name: "Z",package:"swift-package-zlib")
       ],
       resources: [
         .copy("Resources/PrivacyInfo.xcprivacy")
